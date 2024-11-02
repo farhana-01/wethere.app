@@ -1,19 +1,14 @@
-import React from 'react';
+import React from "react";
 
-function CurrentWeather({ data, unit }) {
-  // Convert temperature based on selected unit
-  const temperature =
-    unit === 'F' ? (data.temperature * 9/5) + 32 : data.temperature;
-
+const CurrentWeather = ({ currentWeather }) => {
   return (
-    <div>
-      <h2>Current Weather</h2>
-      <p>Temperature: {temperature}°{unit}</p>
-      <p>Humidity: {data.humidity}%</p>
-      <p>Wind Speed: {data.windSpeed} km/h</p>
-      <p>Condition: {data.condition}</p>
+    <div className="current-weather">
+      <h4>Current Weather in {currentWeather.city}</h4>
+      <p>Temperature: {currentWeather.temp_max}°C</p>
+      <p>Humidity: {currentWeather.humidity}%</p>
+      <p>Wind Speed: {currentWeather.windSpeed} km/h</p>
     </div>
   );
-}
+};
 
 export default CurrentWeather;

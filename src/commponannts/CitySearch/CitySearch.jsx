@@ -1,25 +1,16 @@
-import React, { useState } from 'react';
+import React from "react";
 
-function CitySearch({ onSearch }) {
-  const [city, setCity] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSearch(city); // Pass the city name to the parent component
-    setCity('');
-  };
-
+const CitySearch = ({ searchHandler }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="city-search">
       <input
         type="text"
-        placeholder="Enter city"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
+        placeholder="Search for a city..."
+        onChange={(e) => searchHandler(e.target.value)}
       />
-      <button type="submit">Search</button>
-    </form>
+      <button>Search</button>
+    </div>
   );
-}
+};
 
 export default CitySearch;

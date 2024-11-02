@@ -1,49 +1,98 @@
-import React, { useState } from 'react';
-import CitySearch from '..//CitySearch/CitySearch';
-import CurrentWeather from '..//CurrentWeather/CurrentWeather';
-import WeatherForecast from '..//WeatherForecast/WeatherForecast';
-import TemperatureToggle from '..//TemperatureToggle/TemperatureToggle';
+import React, { useState } from "react";
+import CitySearch from "..//CitySearch/CitySearch";
+import CurrentWeather from "..//CurrentWeather/CurrentWeather";
+import WeatherForecast from "..//WeatherForecast/WeatherForecast";
+import "../styled/style.css";
 
-// Dummy data for weather and forecast
-const dummyData = {
-  current: { temperature: 25, humidity: 50, windSpeed: 10, condition: 'Sunny' },
-  forecast: [
-    {   day: 'Mon', temperature: 27 },
-    { day: 'Tue', temperature: 24 },
-    { day: 'Wed', temperature: 26 },
-    { day: 'Thu', temperature: 28 },
-    { day: 'Fri', temperature: 29 }
-  ]
-};
+const weatherData = [
+  
+  
+  {
+    id: 4,
+    city: "sukkur",
+    dayName: "Sun",
+    temp_max: 34,
+    temp_min: 24,
+    humidity: 65,
+    windSpeed: 15,
+  },
+  {
+    id: 1,
+    city: "pir-jo-goth",
+    dayName: " Mon",
+    temp_max: 32,
+    temp_min: 22,
+    humidity: 60,
+    windSpeed: 10,
+  },
+  {
+    id: 5,
+    city: "khairpur",
+    dayName: "Tue",
+    temp_max: 30,
+    temp_min: 20,
+    humidity: 55,
+    windSpeed: 8,
+  },
+  {
+    id: 6,
+    city: "",
+    dayName: "Wed",
+    temp_max: 30,
+    temp_min: 20,
+    humidity: 55,
+    windSpeed: 8,
+  },
+  {
+    id: 7,
+    city: "Hyderabad",
+    dayName: "Thu",
+    temp_max: 30,
+    temp_min: 20,
+    humidity: 55,
+    windSpeed: 8,
+  },
+  
+  {
+    id: 2,
+    city: "karachi",
+    dayName: "Fri",
+    temp_max: 31,
+    temp_min: 21,
+    humidity: 58,
+    windSpeed: 12,
+  },
+  {
+    id: 3,
+    city: "lahore",
+    dayName: "Sat",
+    temp_max: 33,
+    temp_min: 23,
+    humidity: 62,
+    windSpeed: 9,
+  },
+];
 
-function WeatherDashboard() {
-  const [weatherData, setWeatherData] = useState(dummyData);
-  const [city, setCity] = useState('');
-  const [unit, setUnit] = useState('C'); // 'C' for Celsius, 'F' for Fahrenheit
+const Weather = () => {
+  const [weatherForecast, setWeatherForecast] = useState(weatherData);
+  const [currentWeather, setCurrentWeather] = useState(null);
 
-  // Callback function to handle city search input
-  const handleCitySearch = (searchedCity) => {
-    setCity(searchedCity);
-    // Simulate fetching data and updating the state
-    setWeatherData(dummyData); // Replace with actual API call if needed
-  };
-
-  // Callback function to toggle temperature unit
-  const handleToggleUnit = (selectedUnit) => {
-    setUnit(selectedUnit);
+  const searchHandler = (search) => {
+    const filteredData = weatherData.filter((item) =>
+      item.city.toLowerCase().includes(search.toLowerCase())
+    );
+    setWeatherForecast(filteredData);
+    setCurrentWeather(filteredData.length ? filteredData[0] : null);
   };
 
   return (
-    <div>
-      <h1>Weather Dashboard</h1>
-      <CitySearch onSearch={handleCitySearch} />
-      <TemperatureToggle unit={unit} onToggle={handleToggleUnit} />
-      <CurrentWeather data={weatherData.current} unit={unit} />
-      <WeatherForecast forecastData={weatherData.forecast} unit={unit} />
+    <div className="weather-dashboard">
+      <h2>Weather Dashboard</h2>
+      <CitySearch searchHandler={searchHandler} />
+      {currentWeather && <CurrentWeather currentWeather={currentWeather} />}
+      <WeatherForecast weatherForecast={weatherForecast} />
     </div>
   );
-}
+};
 
-export default WeatherDashboard;
-
-
+export default Weather;

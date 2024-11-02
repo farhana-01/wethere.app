@@ -1,23 +1,19 @@
-import React from 'react';
+import React from "react";
 
-function WeatherForecast({ forecastData, unit }) {
+const WeatherForecast = ({ weatherForecast }) => {
   return (
-    <div>
-      <h2>5-Day Forecast</h2>
-      <ul>
-        {forecastData.map((day, index) => {
-          const temperature =
-            unit === 'F' ? (day.temperature * 9/5) + 32 : day.temperature;
-
-          return (
-            <li key={index}>
-              <p>{day.day}: {temperature}°{unit}</p>
-            </li>
-          );
-        })}
-      </ul>
+    <div className="weather-forecast">
+      <h4>7-Day Weather Forecast</h4>
+      {weatherForecast.map((weather) => (
+        <div key={weather.id} className="forecast-item">
+          <p>{weather.dayName}</p>
+          <p>
+            {weather.temp_max}°C / {weather.temp_min}°C
+          </p>
+        </div>
+      ))}
     </div>
   );
-}
+};
 
 export default WeatherForecast;
