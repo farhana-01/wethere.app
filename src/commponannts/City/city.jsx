@@ -1,6 +1,6 @@
 import React from "react";
 
-const CitySearch = ({ searchHandler }) => {
+const City = ({ searchHandler }) => {
   return (
     <div className="city-search">
       <input
@@ -13,4 +13,4 @@ const CitySearch = ({ searchHandler }) => {
   );
 };
 
-export default CitySearch;
+export default City;

@@ -1,12 +1,11 @@
+
 import React, { useState } from "react";
-import CitySearch from "..//CitySearch/CitySearch";
-import CurrentWeather from "..//CurrentWeather/CurrentWeather";
-import WeatherForecast from "..//WeatherForecast/WeatherForecast";
+import City from "../City/city";
+import WeatherForecast from "../WeatherForecast/WeatherForecast";
+import CurrentWeather from "../CurrentWeather/currentWeather";
 import "../styled/style.css";
 
 const weatherData = [
-  
-  
   {
     id: 4,
     city: "sukkur",
@@ -19,7 +18,7 @@ const weatherData = [
   {
     id: 1,
     city: "pir-jo-goth",
-    dayName: " Mon",
+    dayName: "Mon",
     temp_max: 32,
     temp_min: 22,
     humidity: 60,
@@ -36,7 +35,7 @@ const weatherData = [
   },
   {
     id: 6,
-    city: "",
+    city: "unknown",
     dayName: "Wed",
     temp_max: 30,
     temp_min: 20,
@@ -52,7 +51,6 @@ const weatherData = [
     humidity: 55,
     windSpeed: 8,
   },
-  
   {
     id: 2,
     city: "karachi",
@@ -75,21 +73,29 @@ const weatherData = [
 
 const Weather = () => {
   const [weatherForecast, setWeatherForecast] = useState(weatherData);
-  const [currentWeather, setCurrentWeather] = useState(null);
+  const [currentWeatherData, setCurrentWeatherData] = useState(null);
 
   const searchHandler = (search) => {
     const filteredData = weatherData.filter((item) =>
       item.city.toLowerCase().includes(search.toLowerCase())
     );
+
     setWeatherForecast(filteredData);
-    setCurrentWeather(filteredData.length ? filteredData[0] : null);
+    setCurrentWeatherData(filteredData.length ? filteredData[0] : null);
   };
 
   return (
     <div className="weather-dashboard">
       <h2>Weather Dashboard</h2>
-      <CitySearch searchHandler={searchHandler} />
-      {currentWeather && <CurrentWeather currentWeather={currentWeather} />}
+      <City searchHandler={searchHandler} />
+
+     
+      {currentWeatherData ? (
+        <CurrentWeather data={currentWeatherData} />
+      ) : (
+        <p>No data found for this city.</p> 
+      )}
+
       <WeatherForecast weatherForecast={weatherForecast} />
     </div>
   );
