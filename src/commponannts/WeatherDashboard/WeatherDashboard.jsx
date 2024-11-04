@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import City from "../City/city";
 import WeatherForecast from "../WeatherForecast/WeatherForecast";
-import CurrentWeather from "../CurrentWeather/currentWeather";
+import CurrentWeather from '..//WeatherDashboard/WeatherDashboard';
 import "../styled/style.css";
 
 const weatherData = [
